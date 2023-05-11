@@ -1,0 +1,157 @@
+/* eslint-disable react-native/no-inline-styles */
+import React, {useEffect, useState} from 'react';
+import {
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Pressable,
+  FlatList,
+  TextInput,
+  ToastAndroid,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+// import {API_IMG} from '@env';
+// import {MaterialCommunityIcons} from '@expo/vector-icons';
+
+import {getHistory} from '../../utils/https/transaction';
+
+import global from '../../styles/global';
+import styles from './style';
+
+export default function History() {
+  const navigation = useNavigation();
+
+  const token = useSelector(state => state.auth.data?.token);
+  // const id = useSelector(state => state.auth.data?.data?.id);
+
+  const [dataHistory, setDataHistory] = useState([]);
+  const [refetch, setRefetch] = useState(false);
+
+  useEffect(() => {
+    // getUserData();
+    getHistory(token)
+      .then(res => {
+        setDataHistory(res.data.data);
+        setTimeout(() => {
+          setRefetch(!refetch);
+        }, 2500);
+      })
+      .catch(err => {
+        ToastAndroid.show(err);
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refetch]);
+
+  // const getUserData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem('@userData');
+  //     if (jsonValue != null) {
+  //       const idUser = JSON.parse(jsonValue).user.id;
+  //       getUserHistory(idUser).then(res => {
+  //         setDataHistory(res.data.data.history);
+  //         setTimeout(() => {
+  //           setRefetch(!refetch);
+  //         }, 2500);
+  //       });
+  //     }
+  //   } catch (err) {
+  //     ToastAndroid.show(err);
+  //   }
+  // };
+
+  return (
+    <View
+      style={[
+        global.px_container,
+        {
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#F2F2F2',
+          flex: 1,
+          marginTop: 40,
+        },
+      ]}>
+      <Text style={styles.header}>Order History</Text>
+
+      {/* No history background */}
+      {dataHistory.length < 1 ? (
+        <>
+          <Image
+            source={require('../../images/nohistory.png')}
+            style={{marginTop: 200, marginRight: 20}}
+          />
+          <Text
+            style={{
+              marginTop: 25,
+              textAlign: 'center',
+              fontSize: 28,
+              fontWeight: '900',
+            }}>
+            No history yet
+          </Text>
+          <Text
+            style={{
+              marginTop: 10,
+              textAlign: 'center',
+              fontSize: 17,
+              fontWeight: '400',
+              opacity: 0.57,
+            }}>
+            Hit the orange button down {'\n'}below to Create an order
+          </Text>
+        </>
+      ) : (
+        <></>
+      )}
+      {/* end */}
+
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={dataHistory}
+        renderItem={({item, index}) => {
+          return (
+            <View key={index} style={styles.card}>
+              <View style={{width: '30%'}}>
+                <Image
+                  source={{
+                    uri: item.img,
+                  }}
+                  style={styles.hero}
+                />
+              </View>
+              <View style={{width: '70%'}}>
+                <Text style={styles.title}>{`${item.name}`}</Text>
+                <Text style={styles.price}>{`IDR ${item.price}`}</Text>
+                <Text style={styles.status}>{item.time}</Text>
+              </View>
+            </View>
+          );
+        }}
+      />
+
+      {/* Scroll down if data length > 4 */}
+      {dataHistory.length > 5 ? (
+        <View style={{marginTop: 15}}>
+          <Text style={{fontSize: 14}}>Swipe Up</Text>
+          <Icon name="gesture-swipe-up" size={30} color="#895537" />
+        </View>
+      ) : (
+        <></>
+      )}
+
+      <Pressable style={{marginTop: 15, marginBottom: 25}}>
+        <Text
+          style={[global.btn_primary, styles.backToHome]}
+          onPress={() => {
+            navigation.navigate('Home');
+          }}>
+          Back
+        </Text>
+      </Pressable>
+    </View>
+  );
+}
