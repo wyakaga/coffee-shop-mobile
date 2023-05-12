@@ -14,11 +14,8 @@ const authSlice = createSlice({
         data: action.payload,
       };
     },
-    delete: prevState => {
-      return {
-        ...prevState,
-        data: [],
-      };
+    delete: () => {
+      return initialState;
     },
   },
 });

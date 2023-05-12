@@ -3,7 +3,8 @@ import {Dimensions, StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   title: {
     fontSize: 28,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     marginLeft: 60,
     marginVertical: 10,
     color: '#000000',
@@ -12,6 +13,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width / 2,
     padding: 15,
     alignItems: 'center',
+    marginTop: 10,
   },
   card: {
     backgroundColor: '#fff',
@@ -31,13 +33,15 @@ const styles = StyleSheet.create({
   },
   productTitle: {
     fontSize: 20,
-    fontWeight: '900',
+    // fontWeight: '900',
+    fontFamily: 'Poppins-ExtraBold',
     color: '#6A4029',
     textAlign: 'center',
   },
   productPrice: {
     fontSize: 15,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     paddingBottom: 10,
   },
   imgContainer: {
@@ -93,11 +97,42 @@ const styles = StyleSheet.create({
     borderColor: '#6A4029',
   },
   tabLabel: {
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
     color: 'black',
   },
   activeTabLabel: {
     color: '#6A4029',
+  },
+  btnSort: {
+    padding: 8,
+  },
+  btnSortText: {
+    // fontWeight: 'bold',
+    fontFamily: 'Poppins-Bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  modalItem: {
+    paddingVertical: 8,
+  },
+  notFound: {
+    fontFamily: 'Poppins-Bold',
+    fontSize: 28,
+    color: '#6A4029',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginTop: 60,
   },
 });
 

@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useSelector} from 'react-redux';
 
 import Welcome from './Welcome';
@@ -15,19 +14,10 @@ const Stack = createStackNavigator();
 export default function Auth() {
   const navigation = useNavigation();
 
-  const token = useSelector(state => state.auth.data?.token);
+  const userData = useSelector(state => state.auth.data);
 
   const getUserData = () => {
-    // try {
-    //   const value = await AsyncStorage.getItem('@userData');
-    //   if (value !== null) {
-    //     navigation.replace('Home');
-    //   }
-    // } catch (e) {
-    //   console.log(e);
-    // }
-
-    if (!token) {
+    if (userData.length < 1) {
       navigation.navigate('Auth', {screen: 'Welcome'});
       return;
     }

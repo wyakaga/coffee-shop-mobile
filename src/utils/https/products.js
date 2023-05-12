@@ -13,15 +13,12 @@ export const getProducts = (category, order, search, limit, page) => {
     url += `${category ? '&' : '?'}order=${order}`;
   }
   if (search) {
-    // url += `${category ? '&' : '?'}search=${search}`;
     url += `${category || order ? '&' : '?'}search=${search}`;
   }
   if (limit) {
-    // url += `${category || search ? '&' : '?'}limit=${limit}`;
     url += `${category || order || search ? '&' : '?'}limit=${limit}`;
   }
   if (page) {
-    // url += `${category || search || limit ? '&' : '?'}page=${page}`;
     url += `${category || order || search || limit ? '&' : '?'}page=${page}`;
   }
 

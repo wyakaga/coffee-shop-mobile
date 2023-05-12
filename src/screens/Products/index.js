@@ -9,6 +9,8 @@ import {
   TextInput,
   ScrollView,
   TouchableHighlight,
+  TouchableOpacity,
+  Modal,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import debounce from 'lodash.debounce';
@@ -19,41 +21,77 @@ import global from '../../styles/global';
 import styles from './style';
 
 export default function Products() {
-  const navigation = useNavigation();
-
-  const [dataProductsLeft, setDataProductsLeft] = useState([]);
-  const [dataProductsRight, setDataProductsRight] = useState([]);
   const [dataProducts, setDataProducts] = useState([]);
   const [category, setCategory] = useState('');
   const [order, setOrder] = useState('');
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState('');
+  const [isNoData, setIsNoData] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleSearch = debounce(search => {
-    setSearch(search);
+  const handleSearch = debounce(keyword => {
+    setSearch(keyword);
+    setPage(1);
   }, 1000);
 
+  const handleNextPage = async () => {
+    if (totalPage === page) {
+      return;
+    }
+
+    const nextPage = page + 1;
+
+    try {
+      const result = await getProducts(category, order, search, 6, nextPage);
+      const mergedData = [...dataProducts, ...result.data.data];
+      setDataProducts(mergedData);
+      setPage(nextPage);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlePrevPage = async () => {
+    if (page === 1) {
+      return;
+    }
+
+    const prevPage = page - 1;
+
+    try {
+      const result = await getProducts(category, order, search, 6, prevPage);
+      setDataProducts(result.data.data);
+      setPage(prevPage);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleScroll = event => {
+    const y = event.nativeEvent.contentOffset.y;
+    if (y === 0 && page > 1) {
+      // Reached top of list
+      handlePrevPage();
+    }
+  };
+
+  const debouncedHandleNextPage = debounce(handleNextPage, 1000);
+
   useEffect(() => {
-    // const limitPage = '15';
-    getProducts('', '', 7, 1)
-      .then(res => {
-        // console.log(Math.floor(res.data.data.length / 2));
-        setDataProductsLeft(res.data.data);
-      })
-      .catch(err => console.log(err.message));
-
-    getProducts('', '', 7, 2)
-      .then(res => {
-        // console.log(Math.floor(res.data.data.length / 2));
-        setDataProductsRight(res.data.data);
-      })
-      .catch(err => console.log(err.message));
-
-    getProducts(category, order, search, 25, '')
+    getProducts(category, order, search, 6, page)
       .then(res => {
         setDataProducts(res.data.data);
+        setTotalPage(res.data.meta.totalPage);
+        setIsNoData(false);
       })
-      .catch(err => console.log(err.message));
-  }, [category, order, search]);
+      .catch(err => {
+        console.log(err.message);
+        if (err.response && err.response.status === 404) {
+          setIsNoData(true);
+        }
+      });
+  }, [category, order, search, page]);
 
   const TABS = [
     {key: '', label: 'Favorite'},
@@ -90,6 +128,52 @@ export default function Products() {
           />
         </View>
 
+        <View style={{alignItems: 'flex-start', marginTop: 20, marginLeft: 30}}>
+          <TouchableOpacity
+            onPress={() => setIsModalVisible(true)}
+            style={styles.btnSort}>
+            <Text style={styles.btnSortText}>
+              {order === ''
+                ? 'Sort by'
+                : `${order.charAt(0).toUpperCase()}${order.slice(1)}`}
+            </Text>
+          </TouchableOpacity>
+
+          <Modal visible={isModalVisible} transparent animationType="slide">
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setOrder('');
+                    setIsModalVisible(false);
+                  }}>
+                  <Text style={styles.modalItem}>Reset</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setOrder('cheapest');
+                    setIsModalVisible(false);
+                  }}>
+                  <Text style={styles.modalItem}>Cheapest</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setOrder('priciest');
+                    setIsModalVisible(false);
+                  }}>
+                  <Text style={styles.modalItem}>Priciest</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                  <Text style={styles.modalItem}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+        </View>
+
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -98,7 +182,10 @@ export default function Products() {
             <TouchableHighlight
               key={key}
               underlayColor="#fff"
-              onPress={() => setCategory(key)}
+              onPress={() => {
+                setCategory(key);
+                setPage(1);
+              }}
               style={[
                 styles.tab,
                 category === key ? styles.activeTab : {},
@@ -117,144 +204,64 @@ export default function Products() {
       </View>
 
       {/* View all product start */}
-      <FlatList
-        style={{marginHorizontal: 100}}
-        showsVerticalScrollIndicator={false}
-        data={dataProducts}
-        renderItem={({item, index}) => {
-          return (
-            <Pressable
-              key={index}
-              style={styles.cardWrap}
-              onPress={() => navigation.navigate('ProductDetail', item)}
-              android_ripple={{
-                color: '#6A4029',
-                foreground: true,
-                borderless: true,
-                radius: 40,
-              }}>
-              <View style={styles.imgContainer}>
-                <Image
-                  source={{
-                    uri: item.img,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    // position: 'absolute',
-                    // marginTop: 10,
-                    // zIndex: 2,
-                    resizeMode: 'cover',
-                    borderRadius: 100,
-                  }}
-                />
-              </View>
-              <View style={styles.card}>
-                <Text style={styles.productTitle}>{item.name}</Text>
-                <Text
-                  style={styles.productPrice}>{`IDR ${item.price.toLocaleString(
-                  'id-ID',
-                )}`}</Text>
-              </View>
-            </Pressable>
-          );
-        }}
-      />
-      {/* Left content start */}
-      {/* <FlatList
-        style={{marginLeft: 10, marginBottom: -280, marginTop: 30}}
-        showsVerticalScrollIndicator={false}
-        data={dataProductsLeft}
-        renderItem={({item, index}) => {
-          return (
-            <Pressable
-              key={index}
-              style={styles.cardWrap}
-              onPress={() => {
-                navigation.navigate('ProductDetail', item);
-              }}
-              android_ripple={{
-                color: '#6A4029',
-                foreground: true,
-                borderless: true,
-                radius: 40,
-              }}>
-              <View style={styles.imgContainer}>
-                <Image
-                  source={{
-                    uri: item.img,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    // position: 'absolute',
-                    // marginTop: 10,
-                    // zIndex: 2,
-                    resizeMode: 'cover',
-                    borderRadius: 100,
-                  }}
-                />
-              </View>
-              <View style={styles.card}>
-                <Text style={styles.productTitle}>{item.name}</Text>
-                <Text
-                  style={styles.productPrice}>{`IDR ${item.price.toLocaleString(
-                  'id-ID',
-                )}`}</Text>
-              </View>
-            </Pressable>
-          );
-        }}
-      /> */}
-      {/* left content end */}
-      {/* right content start */}
-      {/* <FlatList
-        style={{marginLeft: 190, marginTop: -115, marginBottom: 15}}
-        showsVerticalScrollIndicator={false}
-        data={dataProductsRight}
-        renderItem={({item, index}) => {
-          return (
-            <Pressable
-              key={index}
-              style={styles.cardWrap}
-              onPress={() => {
-                navigation.navigate('ProductDetail', item);
-              }}
-              android_ripple={{
-                color: '#6A4029',
-                foreground: true,
-                borderless: true,
-                radius: 40,
-              }}>
-              <View style={styles.imgContainer}>
-                <Image
-                  source={{
-                    uri: item.img,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    // position: 'absolute',
-                    // marginTop: 10,
-                    // zIndex: 2,
-                    resizeMode: 'cover',
-                    borderRadius: 100,
-                  }}
-                />
-              </View>
-              <View style={styles.card}>
-                <Text style={styles.productTitle}>{item.name}</Text>
-                <Text
-                  style={styles.productPrice}>{`IDR ${item.price.toLocaleString(
-                  'id-ID',
-                )}`}</Text>
-              </View>
-            </Pressable>
-          );
-        }} */}
-      {/* /> */}
-      {/* right content end */}
+      {isNoData ? (
+        <Text style={styles.notFound}>Products Not Found</Text>
+      ) : (
+        <FlatList
+          style={{marginHorizontal: 5}}
+          showsVerticalScrollIndicator={false}
+          data={dataProducts}
+          renderItem={({item, index}) => (
+            <ProductCard item={item} index={index} />
+          )}
+          numColumns={2}
+          horizontal={false}
+          onEndReached={debouncedHandleNextPage}
+          onEndReachedThreshold={0.1}
+          onScroll={handleScroll}
+        />
+      )}
       {/* View all product end */}
     </View>
+  );
+}
+
+function ProductCard({item, index}) {
+  const navigation = useNavigation();
+
+  return (
+    <Pressable
+      key={index}
+      style={styles.cardWrap}
+      onPress={() => navigation.navigate('ProductDetail', item)}
+      android_ripple={{
+        color: '#6A4029',
+        foreground: true,
+        borderless: true,
+        radius: 40,
+      }}>
+      <View style={styles.imgContainer}>
+        <Image
+          source={{
+            uri: item.img,
+          }}
+          style={{
+            width: '100%',
+            height: '100%',
+            // position: 'absolute',
+            // marginTop: 10,
+            // zIndex: 2,
+            resizeMode: 'cover',
+            borderRadius: 100,
+          }}
+        />
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.productTitle}>{item.name}</Text>
+        <Text style={styles.productPrice}>{`IDR ${item.price.toLocaleString(
+          'id-ID',
+        )}`}</Text>
+      </View>
+    </Pressable>
   );
 }
