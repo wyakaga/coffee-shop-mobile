@@ -120,40 +120,6 @@ export default function Signup({}) {
           <Text style={styles.title}>Sign Up</Text>
           {/* Form start */}
           <View style={styles.signupForm}>
-            {/* <FormItem
-              style={{borderRadius: 10, opacity: 0.85}}
-              placeholder="Enter your email adress"
-              isRequired={true}
-              value={formSignup.email}
-              onChangeText={text => setFormSignup({...formSignup, email: text})}
-              asterik
-              keyboardType="email-address"
-              ref={emailInput}
-            />
-            <FormItem
-              style={{borderRadius: 10, opacity: 0.85}}
-              placeholder="Enter your password"
-              isRequired={true}
-              value={formSignup.password}
-              onChangeText={text =>
-                setFormSignup({...formSignup, password: text})
-              }
-              asterik
-              ref={passwordInput}
-              secureTextEntry={true}
-            />
-            <FormItem
-              style={{borderRadius: 10, opacity: 0.85}}
-              placeholder="Enter your phone number"
-              isRequired={true}
-              value={formSignup.mobile_number}
-              onChangeText={text =>
-                setFormSignup({...formSignup, mobile_number: text})
-              }
-              asterik
-              keyboardType="phone-pad"
-              ref={phoneInput}
-            /> */}
             <View
               style={{
                 flexDirection: 'column',
@@ -168,7 +134,7 @@ export default function Signup({}) {
                 placeholderTextColor={'white'}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                style={{color: 'white'}}
+                style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                 ref={emailInput}
               />
               <View
@@ -203,7 +169,7 @@ export default function Signup({}) {
                   asterik
                   placeholderTextColor={'white'}
                   autoCapitalize="none"
-                  style={{color: 'white'}}
+                  style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                   ref={passwordInput}
                 />
                 <TouchableOpacity
@@ -239,7 +205,7 @@ export default function Signup({}) {
                 placeholder="Enter your phone number"
                 placeholderTextColor={'white'}
                 keyboardType="phone-pad"
-                style={{color: 'white'}}
+                style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                 ref={phoneInput}
               />
               <View

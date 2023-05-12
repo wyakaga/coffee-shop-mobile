@@ -1,18 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Pressable,
-  FlatList,
-  TextInput,
-} from 'react-native';
+import React from 'react';
+import {Text, View, Image, Pressable, TextInput} from 'react-native';
 import global from '../../../styles/global';
 import styles from './style';
 import {useNavigation} from '@react-navigation/native';
-import {API_URL} from '@env';
 
 export default function Chat() {
   const navigation = useNavigation();
@@ -125,14 +116,19 @@ export default function Chat() {
                 alignItems: 'center',
                 paddingRight: 10,
               }}>
-              <Text style={{fontSize: 16, fontWeight: '700'}}>
+              <Text style={{fontSize: 16, fontFamily: 'Poppins-Bold'}}>
                 {staff[0].name}
               </Text>
-              <Text style={{fontSize: 12, fontWeight: '400', color: '#9A9A9D'}}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontFamily: 'Poppins-Regular',
+                  color: '#9A9A9D',
+                }}>
                 {staff[0].time}
               </Text>
             </View>
-            <Text>{staff[0].chat}</Text>
+            <Text style={{fontFamily: 'Poppins-Regular'}}>{staff[0].chat}</Text>
           </View>
         </Pressable>
 
@@ -157,19 +153,29 @@ export default function Chat() {
                 alignItems: 'center',
                 paddingRight: 10,
               }}>
-              <Text style={{fontSize: 16, fontWeight: '700'}}>
+              <Text style={{fontSize: 16, fontFamily: 'Poppins-Bold'}}>
                 {staff[1].name}
               </Text>
-              <Text style={{fontSize: 12, fontWeight: '400', color: '#9A9A9D'}}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontFamily: 'Poppins-Regular',
+                  color: '#9A9A9D',
+                }}>
                 {staff[1].time}
               </Text>
             </View>
-            <Text>{staff[1].chat}</Text>
+            <Text style={{fontFamily: 'Poppins-Regular'}}>{staff[1].chat}</Text>
           </View>
         </View>
       </View>
 
-      <Text style={{color: '#9A9A9D', marginTop: 50}}>
+      <Text
+        style={{
+          color: '#9A9A9D',
+          marginTop: 50,
+          fontFamily: 'Poppins-Regular',
+        }}>
         You have no conversation left
       </Text>
     </View>

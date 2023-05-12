@@ -21,25 +21,29 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    fontWeight: '800',
+    // fontWeight: '800',
+    fontFamily: 'Poppins-ExtraBold',
     color: '#ffffff',
   },
   email: {
     fontSize: 15,
-    fontWeight: '400',
+    // fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
     opacity: 0.75,
     color: '#ffffff',
   },
   phone: {
     fontSize: 15,
-    fontWeight: '400',
+    // fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
     opacity: 0.75,
     color: '#ffffff',
   },
   itemList: {
     color: '#6A4029',
     fontSize: 17,
-    fontWeight: '600',
+    // fontWeight: '600',
+    fontFamily: 'Poppins-SemiBold',
     paddingLeft: 10,
   },
   lineBottom: {

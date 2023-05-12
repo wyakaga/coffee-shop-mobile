@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     paddingLeft: 22,
     backgroundColor: '#EFEEEE',
     fontSize: 17,
+    fontFamily: 'Poppins-Regular',
   },
 });
 

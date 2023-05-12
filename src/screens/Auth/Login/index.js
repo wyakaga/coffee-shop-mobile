@@ -97,30 +97,6 @@ export default function Login() {
         <ScrollView showsVerticalScrollIndicator={false} style={styles.overlay}>
           <Text style={styles.title}>Login</Text>
           <View style={styles.loginForm}>
-            {/* <FormItem
-              style={{borderRadius: 10, opacity: 0.85}}
-              placeholder="Enter your email adress"
-              isRequired
-              keyboardType="email-address"
-              onChangeText={text => setFormLogin({...formLogin, email: text})}
-              asterik
-              value={formLogin.email}
-              ref={emailInput}
-              autoCapitalize="none"
-            /> */}
-            {/* <FormItem
-              style={{borderRadius: 10, opacity: 0.85}}
-              placeholder="Enter your password"
-              isRequired
-              onChangeText={text =>
-                setFormLogin({...formLogin, password: text})
-              }
-              asterik
-              value={formLogin.password}
-              ref={passwordInput}
-              secureTextEntry={true}
-              autoCapitalize="none"
-            /> */}
             <View
               style={{
                 flexDirection: 'column',
@@ -133,7 +109,7 @@ export default function Login() {
                 placeholderTextColor={'white'}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                style={{color: 'white'}}
+                style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                 ref={emailInput}
               />
               <View
@@ -168,7 +144,7 @@ export default function Login() {
                   asterik
                   autoCapitalize="none"
                   placeholderTextColor={'white'}
-                  style={{color: 'white'}}
+                  style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                   ref={passwordInput}
                 />
                 <TouchableOpacity
@@ -194,7 +170,8 @@ export default function Login() {
             <Text
               style={{
                 color: '#fff',
-                fontWeight: '700',
+                // fontWeight: '700',
+                fontFamily: 'Poppins-Bold',
                 textDecorationLine: 'underline',
                 marginTop: 10,
               }}

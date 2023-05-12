@@ -1,22 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Pressable,
-  FlatList,
-  TextInput,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {Text, View, Image, TextInput} from 'react-native';
+// import {useNavigation} from '@react-navigation/native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import global from '../../../styles/global';
 import styles from './style';
 
 export default function ChatRoom() {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <View
@@ -33,9 +25,9 @@ export default function ChatRoom() {
         name="angle-left"
         size={22}
         style={{position: 'absolute', left: 40, top: 85}}
-        onPress={() => {
-          alert('press');
-        }}
+        // onPress={() => {
+        //   alert('press');
+        // }}
       />
       <View
         style={{
@@ -55,7 +47,7 @@ export default function ChatRoom() {
             marginTop: 30,
           }}
         />
-        <Text style={{fontSize: 17, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 17, fontFamily: 'Poppins-Bold', marginTop: 20}}>
           Cheryn
         </Text>
       </View>
@@ -76,7 +68,12 @@ export default function ChatRoom() {
               {width: '70%', backgroundColor: '#6A4029', padding: 15},
             ]}>
             <Text
-              style={{color: 'white', lineHeight: 20, textAlign: 'justify'}}>
+              style={{
+                color: 'white',
+                lineHeight: 20,
+                textAlign: 'justify',
+                fontFamily: 'Poppins-Regular',
+              }}>
               Hey, welcome to Coffee Time! Today is Sunday and you know what?
               You will get a cup of coffee free only at 7 to 9 AM. If you still
               have some questions to ask, let me know. Have a wonderful day!
@@ -90,14 +87,26 @@ export default function ChatRoom() {
             width: '100%',
             paddingHorizontal: 22,
           }}>
-          <Text style={{marginTop: 13, color: '#9F9F9F'}}>12.00 PM</Text>
+          <Text
+            style={{
+              marginTop: 13,
+              color: '#9F9F9F',
+              fontFamily: 'Poppins-Regular',
+            }}>
+            12.00 PM
+          </Text>
         </View>
       </View>
 
       <View style={styles.cardWrap}>
         <View style={{flexDirection: 'row'}}>
           <View style={[styles.card, {width: '70%', padding: 15}]}>
-            <Text style={{lineHeight: 20, textAlign: 'justify'}}>
+            <Text
+              style={{
+                lineHeight: 20,
+                textAlign: 'justify',
+                fontFamily: 'Poppins-Regular',
+              }}>
               Hey, what beans do you use for making cold brew? Can I request the
               beans?
             </Text>
@@ -116,7 +125,14 @@ export default function ChatRoom() {
             width: '100%',
             paddingHorizontal: 22,
           }}>
-          <Text style={{marginTop: 13, color: '#9F9F9F'}}>12.04 PM</Text>
+          <Text
+            style={{
+              marginTop: 13,
+              color: '#9F9F9F',
+              fontFamily: 'Poppins-Regular',
+            }}>
+            12.04 PM
+          </Text>
         </View>
       </View>
 
@@ -134,7 +150,12 @@ export default function ChatRoom() {
               {width: '70%', backgroundColor: '#6A4029', padding: 15},
             ]}>
             <Text
-              style={{color: 'white', lineHeight: 20, textAlign: 'justify'}}>
+              style={{
+                color: 'white',
+                lineHeight: 20,
+                textAlign: 'justify',
+                fontFamily: 'Poppins-Regular',
+              }}>
               Thank you for asking. Yup, you can request the beans, what beans
               do you like?
             </Text>
@@ -147,7 +168,14 @@ export default function ChatRoom() {
             width: '100%',
             paddingHorizontal: 22,
           }}>
-          <Text style={{marginTop: 13, color: '#9F9F9F'}}>12.10 PM</Text>
+          <Text
+            style={{
+              marginTop: 13,
+              color: '#9F9F9F',
+              fontFamily: 'Poppins-Regular',
+            }}>
+            12.10 PM
+          </Text>
         </View>
       </View>
       {/* Chat end */}

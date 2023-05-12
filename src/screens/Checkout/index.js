@@ -1,14 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState, useMemo} from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Pressable,
-  FlatList,
-  TextInput,
-} from 'react-native';
+import React, {useState, useMemo} from 'react';
+import {Text, View, ScrollView, Pressable} from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
 import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -78,11 +70,15 @@ export default function DeliveryMethod({route}) {
         </Text>
       </View>
       <View style={[styles.card]}>
-        <Text style={{fontSize: 17, fontWeight: '500'}}>Iskandar Street</Text>
-        <Text style={{fontSize: 15, fontWeight: '400'}}>
+        <Text style={{fontSize: 17, fontFamily: 'Poppins-Medium'}}>
+          Iskandar Street
+        </Text>
+        <Text style={{fontSize: 15, fontFamily: 'Poppins-Regular'}}>
           Km 5 refinery road oppsite republic road, effurun, Jakarta
         </Text>
-        <Text style={{fontSize: 15, fontWeight: '400'}}>+62 81348287878</Text>
+        <Text style={{fontSize: 15, fontFamily: 'Poppins-Regular'}}>
+          +62 81348287878
+        </Text>
       </View>
 
       <Text style={[styles.delivery, {marginTop: 30}]}>Delivery methods</Text>
@@ -93,9 +89,6 @@ export default function DeliveryMethod({route}) {
           containerStyle={styles.radioButtons}
           selectedId={selectedId}
         />
-        {/* <Text style={{ fontSize: 17, fontWeight: '400' }}>Door delivery</Text>
-                <Text style={{ fontSize: 17, fontWeight: '400' }}>Pick up at store</Text>
-                <Text style={{ fontSize: 17, fontWeight: '400' }}>Dine in</Text> */}
       </View>
 
       <View

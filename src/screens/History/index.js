@@ -3,18 +3,14 @@ import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
-  ScrollView,
   Image,
   Pressable,
   FlatList,
-  TextInput,
   ToastAndroid,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-// import {API_IMG} from '@env';
-// import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import {getHistory} from '../../utils/https/transaction';
 
@@ -25,7 +21,6 @@ export default function History() {
   const navigation = useNavigation();
 
   const token = useSelector(state => state.auth.data?.token);
-  // const id = useSelector(state => state.auth.data?.data?.id);
 
   const [dataHistory, setDataHistory] = useState([]);
   const [refetch, setRefetch] = useState(false);
@@ -45,23 +40,6 @@ export default function History() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refetch]);
-
-  // const getUserData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('@userData');
-  //     if (jsonValue != null) {
-  //       const idUser = JSON.parse(jsonValue).user.id;
-  //       getUserHistory(idUser).then(res => {
-  //         setDataHistory(res.data.data.history);
-  //         setTimeout(() => {
-  //           setRefetch(!refetch);
-  //         }, 2500);
-  //       });
-  //     }
-  //   } catch (err) {
-  //     ToastAndroid.show(err);
-  //   }
-  // };
 
   return (
     <View
@@ -89,7 +67,8 @@ export default function History() {
               marginTop: 25,
               textAlign: 'center',
               fontSize: 28,
-              fontWeight: '900',
+              // fontWeight: '900',
+              fontFamily: 'Poppins-Black',
             }}>
             No history yet
           </Text>
@@ -98,7 +77,8 @@ export default function History() {
               marginTop: 10,
               textAlign: 'center',
               fontSize: 17,
-              fontWeight: '400',
+              // fontWeight: '400',
+              fontFamily: 'Poppins-Regular',
               opacity: 0.57,
             }}>
             Hit the orange button down {'\n'}below to Create an order
@@ -136,7 +116,9 @@ export default function History() {
       {/* Scroll down if data length > 4 */}
       {dataHistory.length > 5 ? (
         <View style={{marginTop: 15}}>
-          <Text style={{fontSize: 14}}>Swipe Up</Text>
+          <Text style={{fontSize: 14, fontFamily: 'Poppins-Regular'}}>
+            Swipe Up
+          </Text>
           <Icon name="gesture-swipe-up" size={30} color="#895537" />
         </View>
       ) : (

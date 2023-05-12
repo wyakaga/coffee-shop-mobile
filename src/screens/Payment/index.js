@@ -142,7 +142,9 @@ export default function Payment({route}) {
             alignItems: 'center',
             marginBottom: -17,
           }}>
-          <Text style={{fontSize: 14}}>Swipe Up</Text>
+          <Text style={{fontSize: 14, fontFamily: 'Poppins-Regular'}}>
+            Swipe Up
+          </Text>
           <Icon name="gesture-swipe-up" size={30} color="#895537" />
         </View>
       ) : (
@@ -159,10 +161,14 @@ export default function Payment({route}) {
             justifyContent: 'space-between',
             width: '100%',
           }}>
-          <Text style={{fontSize: 16}}>Subtotal</Text>
-          <Text style={{fontSize: 16}}>{`IDR ${subtotal.toLocaleString(
-            'id-ID',
-          )}`}</Text>
+          <Text style={{fontSize: 16, fontFamily: 'Poppins-Regular'}}>
+            Subtotal
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins-Regular',
+            }}>{`IDR ${subtotal.toLocaleString('id-ID')}`}</Text>
         </View>
         <View
           style={{
@@ -172,10 +178,12 @@ export default function Payment({route}) {
             justifyContent: 'space-between',
             width: '100%',
           }}>
-          <Text style={{fontSize: 16}}>Tax</Text>
-          <Text style={{fontSize: 16}}>{`IDR ${tax.toLocaleString(
-            'id-ID',
-          )}`}</Text>
+          <Text style={{fontSize: 16, fontFamily: 'Poppins-Regular'}}>Tax</Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins-Regular',
+            }}>{`IDR ${tax.toLocaleString('id-ID')}`}</Text>
         </View>
       </View>
       {/* Summary end */}
@@ -189,11 +197,12 @@ export default function Payment({route}) {
           width: '100%',
           marginBottom: 20,
         }}>
-        <Text style={{fontSize: 20, fontWeight: '700'}}>Total</Text>
+        <Text style={{fontSize: 20, fontFamily: 'Poppins-Bold'}}>Total</Text>
         <Text
           style={{
             fontSize: 20,
-            fontWeight: '700',
+            // fontWeight: '700',
+            fontFamily: 'Poppins-Bold',
           }}>{`IDR ${total.toLocaleString('id-ID')}`}</Text>
       </View>
       {/* Total end */}
@@ -222,7 +231,12 @@ export default function Payment({route}) {
             marginLeft: 10,
           }}>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{fontSize: 28, fontWeight: '600', paddingBottom: 10}}>
+            <Text
+              style={{
+                fontSize: 28,
+                fontFamily: 'Poppins-SemiBold',
+                paddingBottom: 10,
+              }}>
               Confirm your order
             </Text>
             <Icon
@@ -231,14 +245,16 @@ export default function Payment({route}) {
               size={100}
               style={styles.cart}
             />
-            {/* <Text style={{ fontSize: 16.5 }}>{`${title} : ${productQuantity}`}</Text> */}
             <Text
               style={{
                 fontSize: 16.5,
+                fontFamily: 'Poppins-Regular',
               }}>{`Total transaction : IDR ${total.toLocaleString(
               'id-ID',
             )}`}</Text>
-            <Text style={{fontSize: 16.5}}>Are you sure?</Text>
+            <Text style={{fontSize: 16.5, fontFamily: 'Poppins-Regular'}}>
+              Are you sure?
+            </Text>
           </View>
 
           <View
@@ -258,7 +274,7 @@ export default function Payment({route}) {
                 elevation: 3,
               }}
               onPress={toggleModal}>
-              <Text>NO</Text>
+              <Text style={{fontFamily: 'Poppins-Regular'}}>NO</Text>
             </Pressable>
             <Pressable
               style={{
@@ -270,7 +286,9 @@ export default function Payment({route}) {
                 elevation: 3,
               }}
               onPress={handlePayment}>
-              <Text style={{color: 'white'}}>YES</Text>
+              <Text style={{color: 'white', fontFamily: 'Poppins-Regular'}}>
+                YES
+              </Text>
             </Pressable>
           </View>
         </View>

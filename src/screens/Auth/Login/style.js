@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     color: '#fff',
     fontSize: 65,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
   },
   loginForm: {
     width: '90%',
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
     paddingLeft: 155,
     paddingTop: 23,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     backgroundColor: '#FFBA33',
     borderColor: '#FFBA33',
     color: '#000',
@@ -43,7 +45,8 @@ const styles = StyleSheet.create({
     paddingLeft: 125,
     paddingTop: 23,
     fontSize: 17,
-    fontWeight: '500',
+    // fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
     backgroundColor: '#fff',
     borderColor: '#fff',
     color: '#000000',
@@ -66,6 +69,7 @@ const styles = StyleSheet.create({
   borderText: {
     color: 'white',
     marginHorizontal: 10,
+    fontFamily: 'Poppins-Regular',
   },
   buttonGroup: {
     marginHorizontal: 30,
@@ -74,7 +78,8 @@ const styles = StyleSheet.create({
   },
   errorMsg: {
     color: 'red',
-    fontWeight: '500',
+    // fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
 });
 

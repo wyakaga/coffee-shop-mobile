@@ -115,8 +115,8 @@ export default function CustomDrawer() {
             marginTop: -10,
           }}>
           <Text style={styles.name}>{`${
-            userData.length && userData[0].first_name
-          } ${userData.length && userData[0].last_name}`}</Text>
+            userData.length ? userData[0].first_name : 'Anonymous'
+          } ${userData.length ? userData[0].last_name : 'Anonymous'}`}</Text>
           <Text style={styles.email}>
             {userData.length && userData[0].email}
           </Text>

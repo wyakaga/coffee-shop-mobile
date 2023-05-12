@@ -1,26 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  Image,
-  Pressable,
-  FlatList,
-  TextInput,
-  ToastAndroid,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, Image, Pressable, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-// import {API_IMG} from '@env';
 import {useDispatch, useSelector} from 'react-redux';
-// import {
-//   addToCart,
-//   decrementQuantity,
-//   incrementQuantity,
-//   removeFromCart,
-// } from '../../redux/slices/cart';
 import {cartAction} from '../../redux/slices/cart';
-// import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Toast from 'react-native-toast-message';
 
@@ -35,7 +18,7 @@ export default function Cart() {
   const [totalPriceState, setTotalPriceState] = useState('');
 
   const cart = useSelector(state => state.cart.cart);
-  // console.log(cart);
+
   const dispatch = useDispatch();
 
   const increaseQuantity = item => {
@@ -73,7 +56,8 @@ export default function Cart() {
               marginTop: 25,
               textAlign: 'center',
               fontSize: 28,
-              fontWeight: '900',
+              // fontWeight: '900',
+              fontFamily: 'Poppins-Black',
             }}>
             No orders yet
           </Text>
@@ -82,7 +66,8 @@ export default function Cart() {
               marginTop: 10,
               textAlign: 'center',
               fontSize: 17,
-              fontWeight: '400',
+              // fontWeight: '400',
+              fontFamily: 'Poppins-Regular',
               opacity: 0.57,
             }}>
             Hit the orange button down {'\n'}below to Create an order
@@ -147,6 +132,7 @@ export default function Cart() {
                         fontSize: 20,
                         color: 'white',
                         paddingHorizontal: 10,
+                        fontFamily: 'Poppins-Regular',
                       }}>
                       {item.quantity}
                     </Text>
@@ -176,10 +162,13 @@ export default function Cart() {
             width: '100%',
             alignItems: 'center',
           }}>
-          <Text style={{fontWeight: '500', fontSize: 18}}>Total price:</Text>
+          <Text style={{fontFamily: 'Poppins-Medium', fontSize: 18}}>
+            Total price:
+          </Text>
           <Text
             style={{
-              fontWeight: '500',
+              // fontWeight: '500',
+              fontFamily: 'Poppins-Medium',
               fontSize: 15,
             }}>{`IDR ${totalPriceState.toLocaleString('id-ID')}`}</Text>
         </View>
@@ -190,7 +179,9 @@ export default function Cart() {
       {/* Scroll down if data length > 4 */}
       {cart.length > 4 ? (
         <>
-          <Text style={{fontSize: 14}}>Swipe Up</Text>
+          <Text style={{fontSize: 14, fontFamily: 'Poppins-Regular'}}>
+            Swipe Up
+          </Text>
           <Icon name="gesture-swipe-up" size={30} color="#895537" />
         </>
       ) : (

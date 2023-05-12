@@ -22,18 +22,21 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   title: {
-    fontWeight: '900',
+    // fontWeight: '900',
+    fontFamily: 'Poppins-Bold',
     fontSize: 34,
     marginTop: 30,
   },
   address: {
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 17,
     color: '#000000',
   },
   change: {
     fontSize: 15,
-    fontWeight: '400',
+    // fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
     color: '#6A4029',
     marginLeft: 135,
   },
@@ -42,17 +45,20 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   delivery: {
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 17,
     color: '#000000',
   },
   total: {
     fontSize: 18,
-    fontWeight: '500',
+    // fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
   price: {
     fontSize: 22,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     // marginLeft: 140,
   },
   confirmAndCheckout: {
@@ -62,7 +68,8 @@ const styles = StyleSheet.create({
     paddingRight: 65,
     padding: 20,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
   },
 });
 

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: 'white',
+    fontFamily: 'Poppins-Regular',
   },
 });
 

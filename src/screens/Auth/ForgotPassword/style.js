@@ -3,14 +3,16 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   title: {
     fontSize: 65,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
     marginTop: 55,
     color: 'white',
   },
   desc: {
     fontSize: 14,
-    fontWeight: '400',
+    // fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
     textAlign: 'center',
     marginTop: 25,
     color: 'white',
@@ -20,7 +22,8 @@ const styles = StyleSheet.create({
     height: 70,
     paddingTop: 22,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     marginTop: 25,
     marginHorizontal: 20,
     textAlign: 'center',
@@ -32,7 +35,8 @@ const styles = StyleSheet.create({
     height: 70,
     paddingTop: 22,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     marginTop: 25,
     marginHorizontal: 20,
     textAlign: 'center',
@@ -46,7 +50,8 @@ const styles = StyleSheet.create({
   },
   errorMsg: {
     color: 'red',
-    fontWeight: '500',
+    // fontWeight: '500',
+    fontFamily: 'Poppins-Medium',
   },
 });
 

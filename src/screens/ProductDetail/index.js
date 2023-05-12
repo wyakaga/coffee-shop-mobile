@@ -13,13 +13,11 @@ import {useNavigation} from '@react-navigation/native';
 // import {API_IMG} from '@env';
 import {useDispatch} from 'react-redux';
 
-// eslint-disable-next-line no-unused-vars
 import {cartAction} from '../../redux/slices/cart';
 import {getProductDetails} from '../../utils/https/products';
 
 import global from '../../styles/global';
 import styles from './style';
-// import {ScrollView} from 'react-native-gesture-handler';
 
 export default function ProductDetails({route}) {
   const navigation = useNavigation();
@@ -83,12 +81,7 @@ export default function ProductDetails({route}) {
           Delivered only on monday until friday from 1 pm to 7 pm
         </Text>
         <Text style={styles.description}>Description</Text>
-        <Text style={styles.descriptionText}>
-          {/* Cold brewing is a method of brewing that combines ground coffee and cool
-        water and uses time instead of heat to extract the flavor. It is brewed
-        in small batches and steeped for as long as 48 hours. */}
-          {productData.description}
-        </Text>
+        <Text style={styles.descriptionText}>{productData.description}</Text>
       </View>
 
       {/* Add to cart */}

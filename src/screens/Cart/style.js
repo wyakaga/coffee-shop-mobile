@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
     // marginTop: 1,
   },
   title: {
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     fontSize: 17,
     color: '#000',
   },
   price: {
-    fontWeight: '400',
+    // fontWeight: '400',
+    fontFamily: 'Poppins-Regular',
     fontSize: 15,
     color: '#895537',
   },
@@ -44,7 +46,8 @@ const styles = StyleSheet.create({
     paddingRight: 94,
     padding: 20,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
   confirmAndCheckout: {
@@ -52,7 +55,8 @@ const styles = StyleSheet.create({
     paddingRight: 65,
     padding: 20,
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
 });

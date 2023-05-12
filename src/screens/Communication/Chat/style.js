@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     height: 60,
   },
   header: {
-    fontWeight: '900',
+    // fontWeight: '900',
+    fontFamily: 'Poppins-Black',
     fontSize: 34,
     marginTop: 60,
   },
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
     paddingLeft: 52,
     backgroundColor: '#EFEEEE',
     fontSize: 17,
+    fontFamily: 'Poppins-Regular',
   },
 });
 

@@ -130,7 +130,7 @@ export default function ForgotPassword({navigation}) {
                       keyboardType="email-address"
                       autoCapitalize="none"
                       placeholderTextColor={'white'}
-                      style={{color: 'white'}}
+                      style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                     />
                     <View
                       style={{
@@ -158,7 +158,7 @@ export default function ForgotPassword({navigation}) {
                       placeholder="Enter your OTP code"
                       placeholderTextColor={'white'}
                       autoCapitalize="none"
-                      style={{color: 'white'}}
+                      style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                     />
                     <View
                       style={{
@@ -190,7 +190,7 @@ export default function ForgotPassword({navigation}) {
                         asterik
                         placeholderTextColor={'white'}
                         autoCapitalize="none"
-                        style={{color: 'white'}}
+                        style={{color: 'white', fontFamily: 'Poppins-Regular'}}
                       />
                       <TouchableOpacity
                         onPress={() => setIsPasswordShown(!isPasswordShown)}>
@@ -214,56 +214,6 @@ export default function ForgotPassword({navigation}) {
                   ) : null}
                 </SafeAreaView>
               )}
-              {/* <SafeAreaView
-                style={{width: '90%', marginTop: 40, marginHorizontal: 20}}>
-                <TextInput
-                  onChangeText={text => setOtp(text)}
-                  value={otp}
-                  placeholder="Enter your OTP code"
-                  placeholderTextColor={'white'}
-                  style={{color: 'white'}}
-                />
-                <View
-                  style={{
-                    borderBottomWidth: 2,
-                    borderBottomColor: '#9F9F9F',
-                    marginTop: 5,
-                  }}
-                />
-                <TextInput
-                  onChangeText={text => setPassword(text)}
-                  value={password}
-                  placeholder="Enter your new password"
-                  placeholderTextColor={'white'}
-                  style={{color: 'white'}}
-                />
-                <View
-                  style={{
-                    borderBottomWidth: 2,
-                    borderBottomColor: '#9F9F9F',
-                    marginTop: 5,
-                  }}
-                />
-              </SafeAreaView> */}
-
-              {/* <SafeAreaView
-                style={{width: '90%', marginTop: 40, marginHorizontal: 20}}>
-                <TextInput
-                  onChangeText={text => setEmail(text)}
-                  value={email}
-                  placeholder="Enter your email adress"
-                  keyboardType="email-address"
-                  placeholderTextColor={'white'}
-                  style={{color: 'white'}}
-                />
-                <View
-                  style={{
-                    borderBottomWidth: 2,
-                    borderBottomColor: '#9F9F9F',
-                    marginTop: 5,
-                  }}
-                />
-              </SafeAreaView> */}
 
               <Pressable
                 onPress={isClicked === false ? handleOTP : handleForgot}>
