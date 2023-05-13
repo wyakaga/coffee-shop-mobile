@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: 34,
     marginTop: 30,
+    color: '#000000',
   },
   address: {
     // fontWeight: '700',
@@ -54,12 +55,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // fontWeight: '500',
     fontFamily: 'Poppins-Medium',
+    color: '#000000',
   },
   price: {
     fontSize: 22,
     // fontWeight: '700',
     fontFamily: 'Poppins-Bold',
     // marginLeft: 140,
+    color: '#000000',
   },
   confirmAndCheckout: {
     marginTop: 110,

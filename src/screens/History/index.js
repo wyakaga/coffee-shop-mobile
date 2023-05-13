@@ -50,7 +50,7 @@ export default function History() {
           alignItems: 'center',
           backgroundColor: '#F2F2F2',
           flex: 1,
-          marginTop: 40,
+          // marginTop: 40,
         },
       ]}>
       <Text style={styles.header}>Order History</Text>
@@ -91,11 +91,12 @@ export default function History() {
 
       <FlatList
         showsVerticalScrollIndicator={false}
+        style={{paddingBottom: 50, marginBottom: 10}}
         data={dataHistory}
         renderItem={({item, index}) => {
           return (
             <View key={index} style={styles.card}>
-              <View style={{width: '30%'}}>
+              <View style={{flex: 1}}>
                 <Image
                   source={{
                     uri: item.img,
@@ -103,9 +104,11 @@ export default function History() {
                   style={styles.hero}
                 />
               </View>
-              <View style={{width: '70%'}}>
+              <View style={{flex: 1}}>
                 <Text style={styles.title}>{`${item.name}`}</Text>
-                <Text style={styles.price}>{`IDR ${item.price}`}</Text>
+                <Text style={styles.price}>{`IDR ${item.price.toLocaleString(
+                  'id-ID',
+                )}`}</Text>
                 <Text style={styles.status}>{item.time}</Text>
               </View>
             </View>
@@ -114,7 +117,7 @@ export default function History() {
       />
 
       {/* Scroll down if data length > 4 */}
-      {dataHistory.length > 5 ? (
+      {/* {dataHistory.length > 5 ? (
         <View style={{marginTop: 15}}>
           <Text style={{fontSize: 14, fontFamily: 'Poppins-Regular'}}>
             Swipe Up
@@ -123,9 +126,9 @@ export default function History() {
         </View>
       ) : (
         <></>
-      )}
+      )} */}
 
-      <Pressable style={{marginTop: 15, marginBottom: 25}}>
+      {/* <Pressable style={{marginTop: 15, marginBottom: 25}}>
         <Text
           style={[global.btn_primary, styles.backToHome]}
           onPress={() => {
@@ -133,7 +136,7 @@ export default function History() {
           }}>
           Back
         </Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 }

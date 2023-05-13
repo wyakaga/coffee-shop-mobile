@@ -6,13 +6,14 @@ const styles = StyleSheet.create({
     height: 202,
     borderRadius: 20,
     marginLeft: -5,
-    marginTop: 20,
+    // marginTop: 20,
   },
   title: {
     // fontWeight: '700',
     fontFamily: 'Poppins-Bold',
     fontSize: 25,
-    marginTop: 20,
+    // marginTop: 20,
+    color: '#000000',
   },
   product: {
     // fontWeight: '700',
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   confirmAndCheckout: {
-    marginTop: 25,
+    // marginTop: 25,
     paddingLeft: 122,
     paddingRight: 122,
     padding: 20,

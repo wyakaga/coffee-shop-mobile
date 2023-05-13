@@ -8,7 +8,7 @@ import styles from './style';
 function CustomHeader(props) {
   const navigation = useNavigation();
 
-  const {isText, text, bgColor} = props;
+  const {isText, text, bgColor, textStyle} = props;
 
   return (
     <View style={[styles.navbar, {backgroundColor: bgColor}]}>
@@ -18,7 +18,7 @@ function CustomHeader(props) {
           style={styles.chevron}
         />
       </Pressable>
-      {isText === true ? <Text style={styles.title}>{text}</Text> : <></>}
+      {isText === true ? <Text style={textStyle}>{text}</Text> : <></>}
     </View>
   );
 }

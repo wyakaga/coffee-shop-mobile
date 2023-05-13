@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     // borderRadius: 100,
     position: 'absolute',
-    top: -5,
+    top: -25,
     zIndex: 2,
   },
   tabContainer: {

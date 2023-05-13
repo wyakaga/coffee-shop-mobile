@@ -18,17 +18,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: 16,
   },
-  title: {
-    marginTop: 45,
-    // width: 22,
-    // height: 22,
-    // position: 'relative',
-    fontSize: 17,
-    // fontWeight: '900',
-    fontFamily: 'Poppins-Black',
-    color: '#000000',
-    textAlign: 'center',
-  },
 });
 
 export default styles;

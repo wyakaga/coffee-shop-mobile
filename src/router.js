@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -62,6 +63,13 @@ function Router() {
                     navigation={navigation}
                     isText={true}
                     text="Favorite Products"
+                    textStyle={{
+                      marginTop: 45,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Black',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
                     bgColor="#f2f2f2"
                   />
                 ),
@@ -95,22 +103,93 @@ function Router() {
             <Stack.Screen
               name="Cart"
               component={Cart}
-              options={{title: 'Cart'}}
+              // options={{title: 'Cart'}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="Cart"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 100,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Black',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="#f2f2f2"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="DeliveryMethod"
               component={DeliveryMethod}
-              options={{title: 'Checkout'}}
+              // options={{title: 'Checkout'}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="Checkout"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 70,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Black',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="#f2f2f2"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="Payment"
               component={Payment}
-              options={{headerTitle: ''}}
+              // options={{headerTitle: ''}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="Payment"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 70,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Black',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="#f2f2f2"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="History"
               component={History}
-              options={{headerTitle: '', headerShown: false}}
+              // options={{headerTitle: '', headerShown: false}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={false}
+                    bgColor="#f2f2f2"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="ChatRoom"

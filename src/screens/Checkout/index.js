@@ -50,6 +50,7 @@ export default function DeliveryMethod({route}) {
 
   return (
     <ScrollView
+      showsVerticalScrollIndicator={false}
       style={[
         global.px_container,
         {
@@ -70,13 +71,28 @@ export default function DeliveryMethod({route}) {
         </Text>
       </View>
       <View style={[styles.card]}>
-        <Text style={{fontSize: 17, fontFamily: 'Poppins-Medium'}}>
+        <Text
+          style={{
+            fontSize: 17,
+            fontFamily: 'Poppins-Medium',
+            color: '#000000',
+          }}>
           Iskandar Street
         </Text>
-        <Text style={{fontSize: 15, fontFamily: 'Poppins-Regular'}}>
+        <Text
+          style={{
+            fontSize: 15,
+            fontFamily: 'Poppins-Regular',
+            color: '#000000',
+          }}>
           Km 5 refinery road oppsite republic road, effurun, Jakarta
         </Text>
-        <Text style={{fontSize: 15, fontFamily: 'Poppins-Regular'}}>
+        <Text
+          style={{
+            fontSize: 15,
+            fontFamily: 'Poppins-Regular',
+            color: '#000000',
+          }}>
           +62 81348287878
         </Text>
       </View>
@@ -109,7 +125,7 @@ export default function DeliveryMethod({route}) {
         <Text
           style={[global.btn_primary, styles.confirmAndCheckout]}
           onPress={handleConfirm}>
-          Confirm and Checkout
+          Proceed to payment
         </Text>
       </Pressable>
     </ScrollView>

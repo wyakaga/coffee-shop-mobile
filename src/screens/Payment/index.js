@@ -91,7 +91,7 @@ export default function Payment({route}) {
 
       {/* Detail list start */}
       <FlatList
-        style={{height: '45%', marginVertical: 12}}
+        style={{marginVertical: 12}}
         showsVerticalScrollIndicator={false}
         data={cart}
         renderItem={({item, index}) => {
@@ -134,7 +134,7 @@ export default function Payment({route}) {
       {/* Detail list end */}
 
       {/* Scroll down if data length > 4 */}
-      {cart.length > 3 ? (
+      {/* {cart.length > 3 ? (
         <View
           style={{
             justifyContent: 'center',
@@ -149,7 +149,7 @@ export default function Payment({route}) {
         </View>
       ) : (
         <></>
-      )}
+      )} */}
 
       {/* Summary start */}
       <View style={{marginBottom: 20}}>
@@ -161,13 +161,19 @@ export default function Payment({route}) {
             justifyContent: 'space-between',
             width: '100%',
           }}>
-          <Text style={{fontSize: 16, fontFamily: 'Poppins-Regular'}}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins-Regular',
+              color: '#000000',
+            }}>
             Subtotal
           </Text>
           <Text
             style={{
               fontSize: 16,
               fontFamily: 'Poppins-Regular',
+              color: '#000000',
             }}>{`IDR ${subtotal.toLocaleString('id-ID')}`}</Text>
         </View>
         <View
@@ -178,11 +184,19 @@ export default function Payment({route}) {
             justifyContent: 'space-between',
             width: '100%',
           }}>
-          <Text style={{fontSize: 16, fontFamily: 'Poppins-Regular'}}>Tax</Text>
           <Text
             style={{
               fontSize: 16,
               fontFamily: 'Poppins-Regular',
+              color: '#000000',
+            }}>
+            Tax
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: 'Poppins-Regular',
+              color: '#000000',
             }}>{`IDR ${tax.toLocaleString('id-ID')}`}</Text>
         </View>
       </View>
@@ -197,12 +211,16 @@ export default function Payment({route}) {
           width: '100%',
           marginBottom: 20,
         }}>
-        <Text style={{fontSize: 20, fontFamily: 'Poppins-Bold'}}>Total</Text>
+        <Text
+          style={{fontSize: 20, fontFamily: 'Poppins-Bold', color: '#000000'}}>
+          Total
+        </Text>
         <Text
           style={{
             fontSize: 20,
             // fontWeight: '700',
             fontFamily: 'Poppins-Bold',
+            color: '#000000',
           }}>{`IDR ${total.toLocaleString('id-ID')}`}</Text>
       </View>
       {/* Total end */}
