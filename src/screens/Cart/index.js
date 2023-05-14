@@ -49,7 +49,7 @@ export default function Cart() {
         <>
           <Image
             source={require('../../images/noorder.png')}
-            style={{marginTop: 200, marginRight: 20}}
+            style={{marginTop: 50, marginRight: 20}}
           />
           <Text
             style={{
@@ -70,8 +70,17 @@ export default function Cart() {
               fontFamily: 'Poppins-Regular',
               opacity: 0.57,
             }}>
-            Hit the orange button down {'\n'}below to Create an order
+            Hit the brown button down {'\n'}below to create an order
           </Text>
+          <Pressable style={{marginTop: 180, width: '100%'}}>
+            <Text
+              style={[global.btn_primary, styles.startOrdering]}
+              onPress={() => {
+                navigation.navigate('Products');
+              }}>
+              Start Ordering
+            </Text>
+          </Pressable>
         </>
       ) : (
         <></>

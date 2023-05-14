@@ -59,6 +59,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     textAlign: 'center',
   },
+  startOrdering: {
+    // marginTop: 30,
+    // paddingLeft: 103,
+    // paddingRight: 103,
+    padding: 20,
+    fontSize: 17,
+    textAlign: 'center',
+    // fontWeight: '700',
+    fontFamily: 'Poppins-Bold',
+    backgroundColor: '#6A4029',
+    borderColor: '#6A4029',
+    color: 'white',
+  },
 });
 
 export default styles;

@@ -52,17 +52,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6A4029',
   },
-  backToHome: {
+  startOrdering: {
     // marginTop: 30,
-    paddingLeft: 103,
-    paddingRight: 103,
+    // paddingLeft: 103,
+    // paddingRight: 103,
     padding: 20,
     fontSize: 17,
+    textAlign: 'center',
     // fontWeight: '700',
     fontFamily: 'Poppins-Bold',
-    backgroundColor: '#FFBA33',
-    borderColor: '#FFBA33',
-    color: '#6A4029',
+    backgroundColor: '#6A4029',
+    borderColor: '#6A4029',
+    color: 'white',
   },
 });
 

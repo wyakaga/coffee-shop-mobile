@@ -19,6 +19,7 @@ import {getProducts} from '../../utils/https/products';
 import {getUserData} from '../../utils/https/auth';
 
 import Navbar from '../../components/Navbar';
+import Loader from '../../components/Loader';
 
 import global from '../../styles/global';
 import styles from './style';
@@ -28,22 +29,22 @@ export default function Home() {
   const [dataProducts, setDataProducts] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [filter, setFilter] = useState('');
-  const [refetch, setRefetch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [_, setUserData] = useState([]);
 
   const loadProducts = () => {
+    setIsLoading(true);
     getProducts(filter, '', keyword, 10, null)
       .then(res => {
         setDataProducts(res.data.data);
-        setTimeout(() => {
-          setRefetch(!refetch);
-        }, 2500);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
         setDataProducts([]);
+        setIsLoading(false);
       });
   };
 
@@ -51,7 +52,7 @@ export default function Home() {
     loadProducts();
     getUserData(setUserData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refetch, keyword, filter]);
+  }, [keyword, filter]);
 
   const handleSearch = debounce(search => {
     setKeyword(search);
@@ -67,6 +68,7 @@ export default function Home() {
 
   return (
     <View style={[global.bg, {backgroundColor: 'white'}]}>
+      {isLoading && <Loader isLoading={isLoading} />}
       <Navbar />
       {/* <StatusBar style="dark" /> */}
 

@@ -17,6 +17,8 @@ import debounce from 'lodash.debounce';
 
 import {getProducts} from '../../utils/https/products';
 
+import Loader from '../../components/Loader';
+
 import global from '../../styles/global';
 import styles from './style';
 
@@ -28,6 +30,7 @@ export default function Products() {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState('');
   const [isNoData, setIsNoData] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleSearch = debounce(keyword => {
@@ -42,13 +45,17 @@ export default function Products() {
 
     const nextPage = page + 1;
 
+    setIsLoading(true);
+
     try {
       const result = await getProducts(category, order, search, 6, nextPage);
       const mergedData = [...dataProducts, ...result.data.data];
       setDataProducts(mergedData);
       setPage(nextPage);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -59,12 +66,16 @@ export default function Products() {
 
     const prevPage = page - 1;
 
+    setIsLoading(true);
+
     try {
       const result = await getProducts(category, order, search, 6, prevPage);
       setDataProducts(result.data.data);
       setPage(prevPage);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -79,16 +90,19 @@ export default function Products() {
   const debouncedHandleNextPage = debounce(handleNextPage, 1000);
 
   useEffect(() => {
+    setIsLoading(true);
     getProducts(category, order, search, 6, page)
       .then(res => {
         setDataProducts(res.data.data);
         setTotalPage(res.data.meta.totalPage);
         setIsNoData(false);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err.message);
         if (err.response && err.response.status === 404) {
           setIsNoData(true);
+          setIsLoading(false);
         }
       });
   }, [category, order, search, page]);
@@ -113,6 +127,7 @@ export default function Products() {
           paddingTop: 30,
         },
       ]}>
+      {isLoading && <Loader isLoading={isLoading} />}
       <Text style={styles.title}>Choose your favorite</Text>
 
       <View>

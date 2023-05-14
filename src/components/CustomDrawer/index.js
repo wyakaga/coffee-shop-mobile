@@ -7,6 +7,8 @@ import {
 } from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
+import Modal from 'react-native-modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {getUserById, logout} from '../../utils/https/auth';
 import {authAction} from '../../redux/slices/auth';
@@ -25,6 +27,7 @@ export default function CustomDrawer() {
 
   const [userData, setUserData] = useState([]);
   const [refetch, setRefetch] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     getUserData();
@@ -42,16 +45,10 @@ export default function CustomDrawer() {
       .catch(err => {
         console.log(err);
       });
+  };
 
-    // try {
-    //   // const jsonValue = await AsyncStorage.getItem('@userData');
-    //   // if (jsonValue != null) {
-    //   //   // const idUser = JSON.parse(jsonValue).data.id;
-    //   //   // const token = JSON.parse(jsonValue).token;
-    //   // }
-    // } catch (e) {
-    //   console.log(e);
-    // }
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
   };
 
   const isImg = () => {
@@ -89,6 +86,7 @@ export default function CustomDrawer() {
     //   console.log(e);
     // }
   };
+
   return (
     <DrawerContentScrollView
       showsVerticalScrollIndicator={false}
@@ -179,7 +177,7 @@ export default function CustomDrawer() {
             paddingTop: 120,
             paddingBottom: 30,
           }}
-          onPress={handleLogout}>
+          onPress={toggleModal}>
           <Text style={styles.itemList}>Sign Out</Text>
           <Image
             source={require('../../images/brown_right_arrow.png')}
@@ -188,6 +186,80 @@ export default function CustomDrawer() {
         </Pressable>
       </View>
       {/* Navigation end */}
+
+      {/* Modal start */}
+      <Modal
+        isVisible={isModalVisible}
+        animationIn={'zoomIn'}
+        animationOut={'zoomOut'}>
+        <View
+          style={{
+            // flex: 1,
+            backgroundColor: '#fff',
+            paddingVertical: 20,
+            width: '95%',
+            borderRadius: 15,
+            marginLeft: 10,
+          }}>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <Text
+              style={{
+                fontSize: 28,
+                fontFamily: 'Poppins-SemiBold',
+                paddingBottom: 10,
+              }}>
+              Logging out
+            </Text>
+            <Icon
+              name="alert-circle"
+              color={'#DC143C'}
+              size={100}
+              style={styles.cart}
+            />
+            <Text style={{fontSize: 16.5, fontFamily: 'Poppins-Regular'}}>
+              Are you sure?
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: 20,
+            }}>
+            <Pressable
+              style={{
+                backgroundColor: '#04AA6D',
+                paddingHorizontal: 40,
+                paddingVertical: 15,
+                borderRadius: 20,
+                marginRight: 10,
+                elevation: 3,
+              }}
+              onPress={toggleModal}>
+              <Text style={{color: 'white', fontFamily: 'Poppins-Regular'}}>
+                NO
+              </Text>
+            </Pressable>
+            <Pressable
+              style={{
+                backgroundColor: '#DC143C',
+                paddingHorizontal: 40,
+                paddingVertical: 15,
+                borderRadius: 20,
+                marginLeft: 10,
+                elevation: 3,
+              }}
+              onPress={handleLogout}>
+              <Text style={{color: 'white', fontFamily: 'Poppins-Regular'}}>
+                YES
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      {/* Modal end */}
     </DrawerContentScrollView>
   );
 }

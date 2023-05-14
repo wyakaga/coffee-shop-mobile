@@ -1,16 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  Pressable,
-  FlatList,
-  ToastAndroid,
-} from 'react-native';
+import {Text, View, Image, Pressable, FlatList} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {getHistory} from '../../utils/https/transaction';
 
@@ -35,7 +27,7 @@ export default function History() {
         }, 2500);
       })
       .catch(err => {
-        ToastAndroid.show(err);
+        console.log(err);
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,14 +45,12 @@ export default function History() {
           // marginTop: 40,
         },
       ]}>
-      <Text style={styles.header}>Order History</Text>
-
       {/* No history background */}
       {dataHistory.length < 1 ? (
         <>
           <Image
             source={require('../../images/nohistory.png')}
-            style={{marginTop: 200, marginRight: 20}}
+            style={{marginTop: 20, marginRight: 20}}
           />
           <Text
             style={{
@@ -81,8 +71,17 @@ export default function History() {
               fontFamily: 'Poppins-Regular',
               opacity: 0.57,
             }}>
-            Hit the orange button down {'\n'}below to Create an order
+            Hit the brown button down {'\n'}below to create an order
           </Text>
+          <Pressable style={{marginTop: 220, width: '100%'}}>
+            <Text
+              style={[global.btn_primary, styles.startOrdering]}
+              onPress={() => {
+                navigation.navigate('Products');
+              }}>
+              Start Ordering
+            </Text>
+          </Pressable>
         </>
       ) : (
         <></>

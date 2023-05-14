@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {Text, View, Image, TextInput} from 'react-native';
-// import {useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 import global from '../../../styles/global';
 import styles from './style';
 
 export default function ChatRoom() {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   return (
     <View
@@ -21,14 +21,16 @@ export default function ChatRoom() {
           flex: 1,
         },
       ]}>
-      <Fontisto
-        name="angle-left"
-        size={22}
-        style={{position: 'absolute', left: 40, top: 85}}
-        // onPress={() => {
-        //   alert('press');
-        // }}
-      />
+      <View style={{position: 'absolute', left: 20, top: 100}}>
+        <Fontisto
+          name="angle-left"
+          size={22}
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+      </View>
+
       <View
         style={{
           flexDirection: 'column',

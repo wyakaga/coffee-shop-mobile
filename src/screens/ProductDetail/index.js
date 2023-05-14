@@ -10,11 +10,12 @@ import {
   // TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-// import {API_IMG} from '@env';
 import {useDispatch} from 'react-redux';
 
 import {cartAction} from '../../redux/slices/cart';
 import {getProductDetails} from '../../utils/https/products';
+
+import Loader from '../../components/Loader';
 
 import global from '../../styles/global';
 import styles from './style';
@@ -34,15 +35,18 @@ export default function ProductDetails({route}) {
   };
 
   const [productData, setProductData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getProductDetails(id)
       .then(res => {
         setProductData(res.data.data[0]);
-        // console.log(res.data.data[0]);
+        setIsLoading(false);
       })
       .catch(err => {
         console.log(err);
+        setIsLoading(false);
       });
   }, [id]);
 
@@ -60,6 +64,7 @@ export default function ProductDetails({route}) {
         alignItems: 'center',
       }}
       showsVerticalScrollIndicator={false}>
+      {isLoading && <Loader isLoading={isLoading} />}
       {/* <ScrollView horizontal>
                 <Text>Choose a size</Text>
             </ScrollView> */}
