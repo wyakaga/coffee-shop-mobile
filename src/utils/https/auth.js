@@ -51,23 +51,27 @@ export const patchUserProfile = (
 
   // body.append('img', img);
 
-  const newImgUri = img.replace('file:///', 'file://');
+  // const newImgUri = img.replace('file:///', 'file://');
 
-  // console.log(img);
+  if (img) {
+    const imgObject = {
+      uri: img.path,
+      name: img.path.split('/').pop(),
+      type: mime.getType(img.path),
+    };
 
-  body.append('img', {
-    uri: img,
-    type: mime.getType(newImgUri),
-    name: newImgUri.split('/').pop(),
-  });
+    body.append('img', imgObject);
+  }
 
   const url = `${baseUrl}/users/${id}`;
   const config = {
     headers: {
+      Accept: 'application/json',
       Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
   };
+  console.log(body, body._parts[4]);
   return axios.patch(url, body, config);
 };
 

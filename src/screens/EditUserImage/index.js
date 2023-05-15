@@ -5,19 +5,15 @@ import {
   View,
   Image,
   Pressable,
-  // SafeAreaView,
   ToastAndroid,
-  Button,
   PermissionsAndroid,
 } from 'react-native';
-// import * as ImagePicker from 'expo-image-picker';
-// import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
-import * as ImagePicker from 'react-native-image-picker';
-// import RNFetchBlob from 'rn-fetch-blob';
-
 import {getUserById, patchUserProfile} from '../../utils/https/auth';
+
+import Loader from '../../components/Loader';
 
 import global from '../../styles/global';
 import styles from './style';
@@ -30,7 +26,6 @@ export default function EditUserImage() {
   // User profile form update start
   const [editProfileForm, setEditProfilForm] = useState({
     display_name: '',
-    // phone_number: '',
     birth_date: '',
     address: '',
     gender: '',
@@ -38,38 +33,27 @@ export default function EditUserImage() {
   });
   // Image picker
   const [imagePreview, setImagePreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const id = useSelector(state => state.auth.data?.data?.id);
 
   const token = useSelector(state => state.auth.data?.token);
 
-  //*log for testing
-  // console.log(editProfileForm.img);
-
   useEffect(() => {
-    getUserById(id, token).then(res => {
-      setUserData(res.data.data[0]);
-    });
+    setIsLoading(true);
+    getUserById(id, token)
+      .then(res => {
+        setUserData(res.data.data[0]);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const getUserData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('@userData');
-  //     if (jsonValue != null) {
-  //       const idUser = JSON.parse(jsonValue).data.id;
-
-  //       getUserById(idUser, token).then(res => {
-  //         setUserData(res.data.data[0]);
-  //       });
-  //     }
-  //   } catch (e) {
-  //     // console.log(e)
-  //   }
-  // };
-
   const isImg = () => {
-    if (userData.profile_image != null) {
+    if (userData && userData.img) {
       return (
         <>
           {imagePreview ? (
@@ -79,39 +63,23 @@ export default function EditUserImage() {
           )}
         </>
       );
-    } else {
-      return (
-        <>
-          {imagePreview ? (
-            <Image source={{uri: imagePreview}} style={styles.hero} />
-          ) : (
-            <Image
-              source={require('../../images/profile-placeholder.webp')}
-              style={styles.hero}
-            />
-          )}
-        </>
-      );
     }
+    return (
+      <>
+        {imagePreview ? (
+          <Image source={{uri: imagePreview}} style={styles.hero} />
+        ) : (
+          <Image
+            source={require('../../images/profile-placeholder.webp')}
+            style={styles.hero}
+          />
+        )}
+      </>
+    );
   };
 
   // Handle submit
   const handleSubmit = () => {
-    // const body = new FormData();
-    // body.append('display_name', editProfileForm.display_name);
-    // body.append('phone_number', editProfileForm.phone_number);
-    // body.append(
-    //   'birth_date',
-    //   DateTime.fromISO(date.toISOString()).toFormat('yyyy-MM-dd'),
-    // );
-    // body.append('address', editProfileForm.address);
-    // body.append('gender', editProfileForm.gender);
-    // body.append('profile_image', {
-    //   uri: editProfileForm.profile_image,
-    //   type: 'image/jpeg',
-    //   name: 'profile.jpg',
-    // });
-
     patchUserProfile(
       id,
       token,
@@ -123,127 +91,59 @@ export default function EditUserImage() {
     )
       .then(res => {
         ToastAndroid.show('Update success!', ToastAndroid.SHORT);
-        // setTimeout(() => {
-        //   navigation.navigate('Profile');
-        // }, 500);
+        setTimeout(() => {
+          navigation.navigate('Profile');
+        }, 500);
         console.log(res.data);
-      })
-      .catch(err => console.log(err));
-  };
-
-  // const pickImage = async () => {
-  //   try {
-  //     // Request permission to access device's gallery
-  //     const granted = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-  //       {
-  //         title: 'Gallery Permission',
-  //         message: 'App needs access to your gallery',
-  //         buttonNeutral: 'Ask Me Later',
-  //         buttonNegative: 'Cancel',
-  //         buttonPositive: 'OK',
-  //       },
-  //     );
-
-  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //       let result = await ImagePicker.openPicker({
-  //         mediaType: 'photo',
-  //         multiple: false,
-  //         cropping: true,
-  //         width: 400,
-  //         height: 300,
-  //         cropperCircleOverlay: false,
-  //         freeStyleCropEnabled: true,
-  //       });
-  //       if (!result.cancelled) {
-  //         console.log(result);
-  //         setImagePreview(result.path);
-  //         setEditProfilForm({
-  //           ...editProfileForm,
-  //           img: result.path,
-  //         });
-  //       }
-  //     } else {
-  //       console.log('Gallery permission denied');
-  //     }
-  //   } catch (error) {
-  //     console.log('Error picking image:', error);
-  //   }
-  // };
-
-  // const pickImage = async () => {
-  //   try {
-  //     // Request permission to access device's gallery
-  //     const granted = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
-  //       {
-  //         title: 'Gallery Permission',
-  //         message: 'App needs access to your gallery',
-  //         buttonNeutral: 'Ask Me Later',
-  //         buttonNegative: 'Cancel',
-  //         buttonPositive: 'OK',
-  //       },
-  //     );
-
-  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //       let result = await ImagePicker.openPicker({
-  //         mediaType: 'photo',
-  //         multiple: false,
-  //         cropping: true,
-  //         width: 400,
-  //         height: 300,
-  //         cropperCircleOverlay: false,
-  //         freeStyleCropEnabled: true,
-  //       });
-  //       if (!result.cancelled) {
-  //         // Convert image to base64 string
-  //         let base64Image = await RNFetchBlob.fs.readFile(
-  //           result.path,
-  //           'base64',
-  //         );
-
-  //         // Update editProfileForm state with base64 string
-  //         setEditProfilForm({
-  //           ...editProfileForm,
-  //           img: `data:${result.mime};base64,${base64Image}`,
-  //         });
-  //         setImagePreview(`data:${result.mime};base64,${base64Image}`);
-  //       }
-  //     } else {
-  //       console.log('Gallery permission denied');
-  //     }
-  //   } catch (error) {
-  //     console.log('Error picking image:', error);
-  //   }
-  // };
-
-  const pickImage = () => {
-    const options = {
-      mediaType: 'photo',
-      maxWidth: 400,
-      maxHeight: 300,
-      quality: 0.5,
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    ImagePicker.launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        console.log(response);
-        setImagePreview(response.assets[0].uri);
         setEditProfilForm({
           ...editProfileForm,
-          img: response.assets[0].uri,
+          img: null,
         });
+      })
+      .catch(err => {
+        console.log(err);
+        // console.log(err.response.data);
+      });
+  };
+
+  const pickImage = async () => {
+    try {
+      // Request permission to access device's gallery
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES,
+        {
+          title: 'Gallery Permission',
+          message: 'App needs access to your gallery',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        let result = await ImagePicker.openPicker({
+          mediaType: 'photo',
+          multiple: false,
+          cropping: true,
+          width: 400,
+          height: 300,
+          cropperCircleOverlay: false,
+          freeStyleCropEnabled: true,
+        });
+        if (!result.cancelled) {
+          console.log(result);
+          setImagePreview(result.path);
+          setEditProfilForm({
+            ...editProfileForm,
+            img: result,
+          });
+        }
+      } else {
+        console.log('Gallery permission denied');
       }
-    });
+    } catch (error) {
+      console.log('Error picking image:', error);
+    }
   };
 
   const TakeImage = async () => {
@@ -260,7 +160,7 @@ export default function EditUserImage() {
         setImagePreview(result.path);
         setEditProfilForm({
           ...editProfileForm,
-          img: result.path,
+          img: result,
         });
       }
     } catch (error) {
@@ -279,6 +179,8 @@ export default function EditUserImage() {
           flex: 1,
         },
       ]}>
+      {isLoading && <Loader isLoading={isLoading} />}
+
       {/* Bio start */}
       <View
         style={{
@@ -300,15 +202,6 @@ export default function EditUserImage() {
             position: 'relative',
           }}>
           {isImg()}
-          {/* <Pressable
-            onPress={() => {
-              navigation.navigate('EditUserImage');
-            }}>
-            <Image
-              source={require('../../images/edit.png')}
-              style={styles.edit}
-            />
-          </Pressable> */}
         </View>
         <View
           style={{
@@ -321,11 +214,11 @@ export default function EditUserImage() {
               Choose Photo
             </Text>
           </Pressable>
-          {/* <Pressable onPress={TakeImage}>
+          <Pressable onPress={TakeImage}>
             <Text style={[global.btn_primary, styles.takePhoto]}>
               Take Photo
             </Text>
-          </Pressable> */}
+          </Pressable>
         </View>
       </View>
       {/* Bio end */}

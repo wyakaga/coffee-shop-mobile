@@ -88,17 +88,50 @@ function Router() {
             <Stack.Screen
               name="EditProfile"
               component={EditProfile}
-              options={{title: 'Edit Profile'}}
+              // options={{title: 'Edit Profile'}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={false}
+                    bgColor="white"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="EditUserImage"
               component={EditUserImage}
-              options={{title: 'Edit Image'}}
+              // options={{title: 'Edit Image'}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={false}
+                    bgColor="white"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="EditPwd"
               component={EditPwd}
-              options={{title: 'Edit Password'}}
+              // options={{title: 'Edit Password'}}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={false}
+                    bgColor="white"
+                  />
+                ),
+              })}
             />
             <Stack.Screen
               name="Cart"

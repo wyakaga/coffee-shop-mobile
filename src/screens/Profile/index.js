@@ -15,6 +15,8 @@ import {useSelector} from 'react-redux';
 
 import {getUserById} from '../../utils/https/auth';
 
+import Loader from '../../components/Loader';
+
 import global from '../../styles/global';
 import styles from './style';
 
@@ -26,20 +28,23 @@ export default function Profile() {
   const token = useSelector(state => state.auth.data?.token);
 
   const [userData, setUserData] = useState([]);
-  const [refetch, setRefetch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    getUserById(id, token).then(res => {
-      setUserData(res.data.data[0]);
-      setTimeout(() => {
-        setRefetch(!refetch);
-      }, 2000);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refetch]);
+    setIsLoading(true);
+    getUserById(id, token)
+      .then(res => {
+        setUserData(res.data.data[0]);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }, [id, token]);
 
   const isImg = () => {
-    if (userData.img !== null) {
+    if (userData && userData.img) {
       return (
         <Image
           source={{
@@ -48,15 +53,15 @@ export default function Profile() {
           style={styles.hero}
         />
       );
-    } else {
-      return (
-        <Image
-          source={require('../../images/profile-placeholder.webp')}
-          style={styles.hero}
-        />
-      );
     }
+    return (
+      <Image
+        source={require('../../images/profile-placeholder.webp')}
+        style={styles.hero}
+      />
+    );
   };
+
   return (
     <ScrollView
       style={[
@@ -72,6 +77,8 @@ export default function Profile() {
         alignItems: 'flex-start',
       }}
       showsVerticalScrollIndicator={false}>
+      {isLoading && <Loader isLoading={isLoading} />}
+
       <Text style={[styles.header, {marginBottom: 27}]}>My profile</Text>
 
       <View
