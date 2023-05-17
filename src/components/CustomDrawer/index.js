@@ -1,10 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {React, useEffect, useState} from 'react';
 import {Image, Text, View, Pressable, ToastAndroid} from 'react-native';
-import {
-  DrawerContentScrollView,
-  // DrawerItemList,
-} from '@react-navigation/drawer';
+import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import Modal from 'react-native-modal';
@@ -12,7 +9,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {getUserById, logout} from '../../utils/https/auth';
 import {authAction} from '../../redux/slices/auth';
-// import {API_IMG} from '@env';
 
 import styles from './style';
 
@@ -21,31 +17,23 @@ export default function CustomDrawer() {
   const dispatch = useDispatch();
 
   const idUser = useSelector(state => state.auth.data?.data?.id);
+  const userRole = useSelector(state => state.auth.data?.data?.role_id);
   const token = useSelector(state => state.auth.data.token);
 
-  // console.log(idUser);
+  // console.log(authDataTest);
 
   const [userData, setUserData] = useState([]);
-  const [refetch, setRefetch] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    getUserData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refetch]);
-
-  const getUserData = () => {
     getUserById(idUser, token)
       .then(res => {
         setUserData(res.data.data);
-        setTimeout(() => {
-          setRefetch(!refetch);
-        }, 2000);
       })
       .catch(err => {
         console.log(err);
       });
-  };
+  }, [idUser, token]);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -148,19 +136,41 @@ export default function CustomDrawer() {
 
         <Pressable
           style={{flexDirection: 'row', paddingLeft: 30}}
+          onPress={() => navigation.navigate('Cart')}>
+          <Image source={require('../../images/orders.png')} />
+          <Text style={styles.itemList}>Orders</Text>
+        </Pressable>
+        <View style={styles.lineBottom} />
+
+        <Pressable
+          style={{flexDirection: 'row', paddingLeft: 30}}
           onPress={() => navigation.navigate('Products')}>
           <Image source={require('../../images/allMenu.png')} />
           <Text style={styles.itemList}>All Menu</Text>
         </Pressable>
         <View style={styles.lineBottom} />
 
-        <Pressable
-          style={{flexDirection: 'row', paddingLeft: 30}}
-          onPress={() => navigation.navigate('Home')}>
-          <Image source={require('../../images/privacy_policy.png')} />
-          <Text style={styles.itemList}>Privacy policy</Text>
-        </Pressable>
-        <View style={styles.lineBottom} />
+        {userRole === 1 ? (
+          <>
+            <Pressable
+              style={{flexDirection: 'row', paddingLeft: 30}}
+              onPress={() => navigation.navigate('Home')}>
+              <Image source={require('../../images/salesReport.png')} />
+              <Text style={styles.itemList}>Sales Report</Text>
+            </Pressable>
+            <View style={styles.lineBottom} />
+          </>
+        ) : (
+          <>
+            <Pressable
+              style={{flexDirection: 'row', paddingLeft: 30}}
+              onPress={() => navigation.navigate('Home')}>
+              <Image source={require('../../images/privacy_policy.png')} />
+              <Text style={styles.itemList}>Privacy policy</Text>
+            </Pressable>
+            <View style={styles.lineBottom} />
+          </>
+        )}
 
         <Pressable
           style={{flexDirection: 'row', paddingLeft: 30}}

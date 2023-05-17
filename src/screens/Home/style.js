@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 34,
     // fontWeight: '900',
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-Black',
     marginLeft: 40,
     marginTop: 30,
     color: '#000000',
@@ -87,6 +87,13 @@ const styles = StyleSheet.create({
     top: -25,
     zIndex: 2,
   },
+  edit: {
+    width: 35,
+    height: 35,
+    position: 'absolute',
+    bottom: 2,
+    right: 2,
+  },
   tabContainer: {
     flexDirection: 'row',
     marginTop: 30,
@@ -113,6 +120,15 @@ const styles = StyleSheet.create({
   },
   activeTabLabel: {
     color: '#6A4029',
+  },
+  addProduct: {
+    marginVertical: 30,
+    // paddingLeft: 91,
+    // paddingRight: 91,
+    // padding: 20,
+    textAlign: 'center',
+    fontSize: 17,
+    fontFamily: 'Poppins-Bold',
   },
 });
 

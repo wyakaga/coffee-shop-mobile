@@ -11,6 +11,7 @@ import {
 import ImagePicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
+
 import {getUserById, patchUserProfile} from '../../utils/https/auth';
 
 import Loader from '../../components/Loader';
@@ -49,8 +50,7 @@ export default function EditUserImage() {
       .catch(() => {
         setIsLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, token]);
 
   const isImg = () => {
     if (userData && userData.img) {

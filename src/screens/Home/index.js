@@ -9,10 +9,11 @@ import {
   FlatList,
   TextInput,
   TouchableHighlight,
+  RefreshControl,
 } from 'react-native';
 import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-// import {StatusBar} from 'expo-status-bar';
+import {useSelector} from 'react-redux';
 import debounce from 'lodash.debounce';
 
 import {getProducts} from '../../utils/https/products';
@@ -26,10 +27,14 @@ import styles from './style';
 
 export default function Home() {
   const navigation = useNavigation();
+
+  const userRole = useSelector(state => state.auth.data?.data?.role_id);
+
   const [dataProducts, setDataProducts] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [filter, setFilter] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const [_, setUserData] = useState([]);
@@ -40,11 +45,13 @@ export default function Home() {
       .then(res => {
         setDataProducts(res.data.data);
         setIsLoading(false);
+        setRefreshing(false);
       })
       .catch(err => {
         console.log(err);
         setDataProducts([]);
         setIsLoading(false);
+        setRefreshing(false);
       });
   };
 
@@ -57,6 +64,11 @@ export default function Home() {
   const handleSearch = debounce(search => {
     setKeyword(search);
   }, 1000);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    loadProducts();
+  };
 
   const TABS = [
     {key: '', label: 'Favorite'},
@@ -72,7 +84,11 @@ export default function Home() {
       <Navbar />
       {/* <StatusBar style="dark" /> */}
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <Text style={styles.title}>A good coffee is {'\n'}a good day</Text>
 
         <View style={{position: 'relative'}}>
@@ -155,6 +171,17 @@ export default function Home() {
                         borderRadius: 10,
                       }}
                     />
+                    {userRole === 1 && (
+                      <Pressable
+                        onPress={() => {
+                          navigation.navigate('EditProduct', item);
+                        }}>
+                        <Image
+                          source={require('../../images/edit.png')}
+                          style={styles.edit}
+                        />
+                      </Pressable>
+                    )}
                   </View>
                   <View style={styles.card}>
                     <Text numberOfLines={2} style={styles.productTitle}>
@@ -173,6 +200,18 @@ export default function Home() {
           {/* Jangan gunakan scrolllview ketika berhubungan dengan data apalagi mapping data, gunakan flatlist */}
         </View>
         {/* Product Card End */}
+
+        {/* Add Product Button Start */}
+        {userRole === 1 && (
+          <Pressable
+            style={{width: '80%', alignSelf: 'center'}}
+            onPress={() => navigation.navigate('CreateProduct')}>
+            <Text style={[global.btn_primary, styles.addProduct]}>
+              Add Product
+            </Text>
+          </Pressable>
+        )}
+        {/* Add Product Button End */}
       </ScrollView>
     </View>
   );

@@ -10,7 +10,8 @@ import {
   // TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {cartAction} from '../../redux/slices/cart';
 import {getProductDetails} from '../../utils/https/products';
@@ -22,7 +23,10 @@ import styles from './style';
 
 export default function ProductDetails({route}) {
   const navigation = useNavigation();
-  // eslint-disable-next-line no-unused-vars
+
+  const cart = useSelector(state => state.cart.cart);
+  const userRole = useSelector(state => state.auth.data?.data?.role_id);
+
   const {id, name, price, category, img} = route.params;
 
   // REDUX
@@ -65,9 +69,75 @@ export default function ProductDetails({route}) {
       }}
       showsVerticalScrollIndicator={false}>
       {isLoading && <Loader isLoading={isLoading} />}
+
+      <View style={styles.navbar}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Image
+            source={require('../../images/chevron-left.png')}
+            style={styles.chevron}
+          />
+        </Pressable>
+        {userRole === 1 ? (
+          <Pressable
+            onPress={() =>
+              navigation.navigate('EditProduct', {
+                id,
+                name,
+                price,
+                category,
+                img,
+              })
+            }
+            style={styles.cart}>
+            <Icon
+              name="pencil-outline"
+              color={'black'}
+              size={24}
+              style={styles.cartImg}
+            />
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={() => navigation.navigate('Cart')}
+            style={styles.cart}>
+            <Icon
+              name="cart-outline"
+              color={'black'}
+              size={24}
+              style={styles.cartImg}
+            />
+            {cart.length > 0 ? (
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>{cart.length}</Text>
+              </View>
+            ) : (
+              <></>
+            )}
+          </Pressable>
+        )}
+        {/* <Pressable
+        onPress={() => navigation.navigate('Cart')}
+        style={styles.cart}>
+        <Icon
+          name="cart-outline"
+          color={'black'}
+          size={24}
+          style={styles.cartImg}
+        />
+        {cart.length > 0 ? (
+          <View style={styles.badge}>
+            <Text style={styles.badgeText}>{cart.length}</Text>
+          </View>
+        ) : (
+          <></>
+        )}
+      </Pressable> */}
+      </View>
+
       {/* <ScrollView horizontal>
                 <Text>Choose a size</Text>
             </ScrollView> */}
+
       <View style={styles.imgContainer}>
         <Image
           source={{
@@ -76,6 +146,7 @@ export default function ProductDetails({route}) {
           style={styles.hero}
         />
       </View>
+
       <View>
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.price}>{`IDR ${price.toLocaleString(

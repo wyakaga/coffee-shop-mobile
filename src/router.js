@@ -20,8 +20,10 @@ import DeliveryMethod from './screens/Checkout';
 import Payment from './screens/Payment';
 import History from './screens/History';
 import ChatRoom from './screens/Communication/Chatroom';
+import CreateProduct from './screens/Admin/CreateProduct';
+import EditProduct from './screens/Admin/EditProduct';
 
-import ProductDetailHeader from './components/ProductDetailHeader';
+// import ProductDetailHeader from './components/ProductDetailHeader';
 import CustomHeader from './components/CustomHeader';
 
 const Stack = createStackNavigator();
@@ -78,12 +80,7 @@ function Router() {
             <Stack.Screen
               name="ProductDetail"
               component={ProductDetails}
-              options={({navigation, route}) => ({
-                // eslint-disable-next-line react/no-unstable-nested-components
-                header: props => (
-                  <ProductDetailHeader {...props} navigation={navigation} />
-                ),
-              })}
+              options={{headerShown: false}}
             />
             <Stack.Screen
               name="EditProfile"
@@ -227,6 +224,35 @@ function Router() {
             <Stack.Screen
               name="ChatRoom"
               component={ChatRoom}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="CreateProduct"
+              component={CreateProduct}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="New Product"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 60,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Bold',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="white"
+                  />
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="EditProduct"
+              component={EditProduct}
               options={{headerShown: false}}
             />
           </Stack.Navigator>
