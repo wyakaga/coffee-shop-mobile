@@ -156,7 +156,7 @@ export default function CustomDrawer() {
           <>
             <Pressable
               style={{flexDirection: 'row', paddingLeft: 30}}
-              onPress={() => navigation.navigate('Home')}>
+              onPress={() => navigation.navigate('SalesChart')}>
               <Image source={require('../../images/salesReport.png')} />
               <Text style={styles.itemList}>Sales Report</Text>
             </Pressable>

@@ -23,6 +23,7 @@ import ChatRoom from './screens/Communication/Chatroom';
 import CreateProduct from './screens/Admin/CreateProduct';
 import EditProduct from './screens/Admin/EditProduct';
 import ManageOrder from './screens/Admin/ManageOrder';
+import ReportDashboard from './screens/Admin/ReportDashboard';
 
 // import ProductDetailHeader from './components/ProductDetailHeader';
 import CustomHeader from './components/CustomHeader';
@@ -267,6 +268,30 @@ function Router() {
                     navigation={navigation}
                     isText={true}
                     text="Customer Order"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 60,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Bold',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="white"
+                  />
+                ),
+              })}
+            />
+            <Stack.Screen
+              name="SalesChart"
+              component={ReportDashboard}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="Sales Chart"
                     textStyle={{
                       marginTop: 45,
                       marginLeft: 60,

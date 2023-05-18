@@ -32,3 +32,15 @@ export const manageTransaction = (token, historyId) => {
   const config = {headers: {Authorization: `Bearer ${token}`}};
   return axios.patch(url, null, config);
 };
+
+export const getMonthlyReport = token => {
+  const url = `${baseUrl}/history/monthly-report`;
+  const config = {headers: {Authorization: `Bearer ${token}`}};
+  return axios.get(url, config);
+};
+
+export const getDailyAverage = token => {
+  const url = `${baseUrl}/history/daily-transactions`;
+  const config = {headers: {Authorization: `Bearer ${token}`}};
+  return axios.get(url, config);
+};
