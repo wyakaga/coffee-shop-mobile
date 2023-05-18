@@ -15,6 +15,12 @@ export const createTransaction = (token, body) => {
   return axios.post(url, body, config);
 };
 
+export const deleteHistory = (token, historyId) => {
+  const url = `${baseUrl}/history/${historyId}`;
+  const config = {headers: {Authorization: `Bearer ${token}`}};
+  return axios.delete(url, config);
+};
+
 export const getPendingTransaction = token => {
   const url = `${baseUrl}/history/status`;
   const config = {headers: {Authorization: `Bearer ${token}`}};
