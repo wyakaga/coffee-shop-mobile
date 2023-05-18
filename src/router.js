@@ -22,6 +22,7 @@ import History from './screens/History';
 import ChatRoom from './screens/Communication/Chatroom';
 import CreateProduct from './screens/Admin/CreateProduct';
 import EditProduct from './screens/Admin/EditProduct';
+import ManageOrder from './screens/Admin/ManageOrder';
 
 // import ProductDetailHeader from './components/ProductDetailHeader';
 import CustomHeader from './components/CustomHeader';
@@ -254,6 +255,30 @@ function Router() {
               name="EditProduct"
               component={EditProduct}
               options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ManageOrder"
+              component={ManageOrder}
+              options={({navigation, route}) => ({
+                // eslint-disable-next-line react/no-unstable-nested-components
+                header: props => (
+                  <CustomHeader
+                    {...props}
+                    navigation={navigation}
+                    isText={true}
+                    text="Customer Order"
+                    textStyle={{
+                      marginTop: 45,
+                      marginLeft: 60,
+                      fontSize: 17,
+                      fontFamily: 'Poppins-Bold',
+                      color: '#000000',
+                      textAlign: 'center',
+                    }}
+                    bgColor="white"
+                  />
+                ),
+              })}
             />
           </Stack.Navigator>
         </NavigationContainer>

@@ -136,7 +136,9 @@ export default function CustomDrawer() {
 
         <Pressable
           style={{flexDirection: 'row', paddingLeft: 30}}
-          onPress={() => navigation.navigate('Cart')}>
+          onPress={() =>
+            navigation.navigate(userRole === 1 ? 'ManageOrder' : 'Cart')
+          }>
           <Image source={require('../../images/orders.png')} />
           <Text style={styles.itemList}>Orders</Text>
         </Pressable>

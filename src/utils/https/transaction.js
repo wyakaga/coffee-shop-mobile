@@ -14,3 +14,15 @@ export const createTransaction = (token, body) => {
   const config = {headers: {Authorization: `Bearer ${token}`}};
   return axios.post(url, body, config);
 };
+
+export const getPendingTransaction = token => {
+  const url = `${baseUrl}/history/status`;
+  const config = {headers: {Authorization: `Bearer ${token}`}};
+  return axios.get(url, config);
+};
+
+export const manageTransaction = (token, historyId) => {
+  const url = `${baseUrl}/history/change-status/${historyId}`;
+  const config = {headers: {Authorization: `Bearer ${token}`}};
+  return axios.patch(url, null, config);
+};
