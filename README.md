@@ -1,6 +1,6 @@
 # <h1 align="center">Coffee Shop Mobile</h1>
 
-This is a frontend part for [api project](https://github.com/wyakaga/coffeeshop-backend).
+This is a mobile app version for [API project](https://github.com/wyakaga/coffeeshop-backend) and you can view the web version [here](https://github.com/wyakaga/coffeeshop-fe).
 
  <p align="center">
     <a href="https://drive.google.com/file/d/13v70hncxNowZmmkfZPHpjOt2bQy9zE4T/view?usp=sharing">View Demo</a>
@@ -36,8 +36,8 @@ Coffee Shop is a cross platform mobile application (Android & iOS) for ordering 
 
 ### Built With
 
-- [React](https://reactjs.org/)
-- [Other dependencies]
+- [React Native](https://reactnative.dev/)
+- [Redux](https://github.com/reduxjs/redux)
 
 ## Getting Started
 
@@ -45,7 +45,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-[Pre-requisites that need to be installed on the local machine before running the application]
+You can read the docs [here](https://reactnative.dev/docs/environment-setup)
 
 ### Installation
 
@@ -80,3 +80,6 @@ npm run android
 ```sh
 npm run ios
 ```
+
+## License
+This project is licensed under the ISC license
