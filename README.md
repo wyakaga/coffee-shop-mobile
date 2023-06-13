@@ -1,8 +1,6 @@
 <h1 id="title" align="center">Coffee Shop Mobile</h1>
 
-<p align="center"><img src="https://socialify.git.ci/wyakaga/coffee-shop-mobile/image?description=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Brick%20Wall&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
-
-Coffee Shop is a cross platform mobile application (Android &amp; iOS) for ordering foods and beverages. This project was developed using a framework/library React Native and Redux. This is a mobile app version for [API project](https://github.com/wyakaga/coffeeshop-backend) and you can view the web version [here](https://github.com/wyakaga/coffeeshop-fe).
+Coffee Shop is a cross platform mobile application (Android &amp; iOS) for ordering foods and beverages. This project was developed using a framework/library React Native and Redux.
 
 <h2>💻 Built with</h2>
 
@@ -63,3 +61,9 @@ npm run ios
 <h2>🛡️ License:</h2>
 
 This project is licensed under the ISC License
+
+<h2>Related Projects</h2>
+
+* [Coffee Shop API (API for this project)](https://github.com/wyakaga/coffeeshop-backend)
+
+* [Coffee Shop Web App (Web version of this project)](https://github.com/wyakaga/coffeeshop-backend)
