@@ -66,4 +66,4 @@ This project is licensed under the ISC License
 
 * [Coffee Shop API (API for this project)](https://github.com/wyakaga/coffeeshop-backend)
 
-* [Coffee Shop Web App (Web version of this project)](https://github.com/wyakaga/coffeeshop-backend)
+* [Coffee Shop Web App (Web version of this project)](https://github.com/wyakaga/coffeeshop-fe)
